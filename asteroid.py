@@ -1,15 +1,24 @@
 import pygame
 from circleshape import CircleShape
-from constants import PLAYER_RADIUS, LINE_WIDTH, ASTEROID_MIN_RADIUS, SCORE_LARGE_ASTEROID, SCORE_MEDIUM_ASTEROID, SCORE_SMALL_ASTEROID
+from constants import PLAYER_RADIUS, LINE_WIDTH, ASTEROID_MIN_RADIUS, SCORE_LARGE_ASTEROID, SCORE_MEDIUM_ASTEROID, SCORE_SMALL_ASTEROID, PIXEL_SIZE, PIXEL_LINE_WIDTH
 from logger import log_state, log_event
 import random
 
 class Asteroid(CircleShape):
     def __init__(self, x: float, y: float, radius: float) -> None:
         super().__init__(x, y, radius)
+        self.shape_offsets = []
+        self.num_points = random.randint(9, 14)
+        for i in range(self.num_points):
+            angle = i * (360/self.num_points)
+            distance = random.uniform(self.radius * 0.7, self.radius * 1.2)
+            self.shape_offsets.append(pygame.Vector2(0,1).rotate(angle) * distance)
 
     def draw(self, screen):
-        pygame.draw.circle(screen, "white", self.position, self.radius, LINE_WIDTH)
+        points = []
+        for offset in self.shape_offsets:
+            points.append((self.position + offset) / PIXEL_SIZE)
+        pygame.draw.polygon(screen, "white", points, PIXEL_LINE_WIDTH)
 
     def update(self, dt):
         self.position += self.velocity * dt 

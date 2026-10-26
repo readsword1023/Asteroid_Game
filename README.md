@@ -8,6 +8,7 @@ A simple Asteroids game built with Python and [pygame](https://www.pygame.org/).
 - Asteroids that split into smaller ones when shot (large -> medium -> small)
 - Score system with a live score counter in the top-right corner
 - 8-bit starry night sky background with twinkling stars
+- Pixel-art look: the ship, asteroids and shots are drawn at low resolution and scaled up
 - Game over screen showing your final score, with a quick restart
 
 ## Requirements
@@ -93,9 +94,9 @@ If an asteroid hits your ship, a **GAME OVER** screen shows your **Final Score**
 | Key          | Action                |
 | ------------ | --------------------- |
 | `R`          | Restart a new game    |
-| Any other key | Exit the game        |
+| `Enter`      | Exit the game         |
 
-Closing the window also exits.
+All other keys are ignored on this screen, so an accidental key press won't dismiss it. Closing the window also exits.
 
 ## Project layout
 
@@ -115,6 +116,7 @@ Closing the window also exits.
 - Point values: `SCORE_*` in `constants.py`
 - Sky colour, star count and twinkle speed: top of `background.py`
 - Ship speed, shot speed and cooldown: `constants.py`
+- Pixel size (how chunky the 8-bit look is): `PIXEL_SIZE` in `constants.py` (use a number that divides 1280 and 720, such as 2, 4 or 8)
 
 ## Notes
 

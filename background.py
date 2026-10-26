@@ -1,8 +1,8 @@
 import random
 import pygame
-from constants import SCREEN_WIDTH, SCREEN_HEIGHT
+from constants import SCREEN_WIDTH, SCREEN_HEIGHT, PIXEL_SIZE
 
-PIXEL = 4  # size of one "8-bit" pixel
+PIXEL = PIXEL_SIZE  # size of one "8-bit" pixel
 STAR_COUNT = 140
 TWINKLE_SECONDS = 0.6
 SKY_COLOR = (4, 4, 16)

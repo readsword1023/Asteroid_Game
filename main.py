@@ -5,7 +5,7 @@ from asteroidfield import AsteroidField
 from shot import Shot
 from background import Background
 import pygame 
-from constants import SCREEN_HEIGHT, SCREEN_WIDTH 
+from constants import SCREEN_HEIGHT, SCREEN_WIDTH, PIXEL_SIZE 
 from logger import log_state, log_event
 import sys
 
@@ -19,11 +19,14 @@ def show_game_over(screen, background, clock, score):
             if event.type == pygame.QUIT:
                 return False
             if event.type == pygame.KEYDOWN:
-                return event.key == pygame.K_r
+                if event.key == pygame.K_r:
+                    return True
+                if event.key in (pygame.K_RETURN, pygame.K_KP_ENTER):
+                    return False
         background.draw(screen)
         title = title_font.render("GAME OVER", True, "red")
         final = score_font.render(f"Final Score: {score}", True, "white")
-        hint = hint_font.render("Press R to restart  |  any other key to exit", True, "gray")
+        hint = hint_font.render("Press R to restart  |  Enter to exit", True, "gray")
         screen.blit(title, (center_x - title.get_width() // 2, SCREEN_HEIGHT // 2 - 120))
         screen.blit(final, (center_x - final.get_width() // 2, SCREEN_HEIGHT // 2 - 20))
         screen.blit(hint, (center_x - hint.get_width() // 2, SCREEN_HEIGHT // 2 + 60))
@@ -36,6 +39,7 @@ def main():
     clock = pygame.time.Clock()
     dt = 0.0
     background = Background()
+    pixel_screen = pygame.Surface((SCREEN_WIDTH // PIXEL_SIZE, SCREEN_HEIGHT // PIXEL_SIZE))
     score = 0
     font = pygame.font.Font(None, 36)
     asteroids = pygame.sprite.Group()
@@ -70,8 +74,12 @@ def main():
                     asteroid.split()
                     shot.kill()
 
+        pixel_screen.fill("black")
         for object in drawable:
-            object.draw(screen)
+            object.draw(pixel_screen)
+        scaled = pygame.transform.scale(pixel_screen, (SCREEN_WIDTH, SCREEN_HEIGHT))
+        scaled.set_colorkey("black")
+        screen.blit(scaled, (0, 0))
 
         score_text = font.render(f"Score: {score}", True, "white")
         screen.blit(score_text, (SCREEN_WIDTH - score_text.get_width() - 10, 10))
