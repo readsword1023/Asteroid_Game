@@ -65,6 +65,10 @@ Pick **one** of the two options below.
    python main.py
    ```
 
+## Updating to the latest version
+
+If you already cloned the game, run `git pull` inside the project folder to get the latest version, then run the game again.
+
 ## Controls
 
 | Key     | Action                  |
