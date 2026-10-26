@@ -1,0 +1,7 @@
+# Virtual environment (machine-specific, recreate with uv or pip)
+.venv/
+venv/
+
+# Python cache
+__pycache__/
+*.pyc
