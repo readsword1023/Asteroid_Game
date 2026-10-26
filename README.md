@@ -16,6 +16,16 @@ A simple Asteroids game built with Python and [pygame](https://www.pygame.org/).
 - Git
 - pygame 2.6.1 (installed automatically by the steps below)
 
+## Quick start
+
+```bash
+git clone https://github.com/readsword1023/Asteroid_Game.git
+cd Asteroid_Game
+uv run main.py
+```
+
+No uv? See the full setup steps below.
+
 ## Setup after cloning
 
 ```bash
@@ -106,7 +116,14 @@ Closing the window also exits.
 - Sky colour, star count and twinkle speed: top of `background.py`
 - Ship speed, shot speed and cooldown: `constants.py`
 
+## Notes
+
+- Running the game writes `game_state.jsonl` and `game_events.jsonl` in the project folder (see `logger.py`).
+- On Windows 11 / recent Windows 10 you can also run the game inside WSL; WSLg shows the pygame window automatically.
+
 ## Troubleshooting
+
+- **Cloned before `.venv` was removed from the repo** and getting errors like "bad interpreter" or a missing Python: delete the old `.venv` folder (`Remove-Item -Recurse -Force .venv` on Windows, `rm -rf .venv` on macOS / Linux), then follow the setup steps again.
 
 - **`python` / `py` not found or wrong version**: install Python 3.13+ from [python.org](https://www.python.org/downloads/) and re-open your terminal.
 - **PowerShell won't activate the venv** ("running scripts is disabled"): run `Set-ExecutionPolicy -Scope Process Bypass` and try again, or use Option 1.
